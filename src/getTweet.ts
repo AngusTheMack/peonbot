@@ -20,6 +20,10 @@ const qoutes = [
     'Me not that kind of orc!',
 ];
 
+export const randomIntFromInterval = (min: number, max: number) => {
+    return Math.floor(Math.random() * (max - min + 1) + min);
+};
+
 export const getRandomTweet = (lastTweets: string[]): string => {
     while (true) {
         const possibleTweet =
@@ -28,8 +32,4 @@ export const getRandomTweet = (lastTweets: string[]): string => {
             return possibleTweet;
         }
     }
-};
-
-const randomIntFromInterval = (min: number, max: number) => {
-    return Math.floor(Math.random() * (max - min + 1) + min);
 };

@@ -6,11 +6,7 @@
         "prettier/@typescript-eslint"
     ],
     "parser": "@typescript-eslint/parser",
-    "plugins": [
-        "@typescript-eslint",
-        "prettier",
-        "@babel/plugin-transform-runtime"
-    ],
+    "plugins": ["@typescript-eslint", "prettier"],
     "rules": {
         "prettier/prettier": "warn"
     },
