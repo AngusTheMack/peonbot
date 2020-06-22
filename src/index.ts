@@ -21,14 +21,15 @@ export const handler = async (event: APIGatewayEvent): Promise<string> => {
             return link;
         });
     } else {
-        const now = moment().utcOffset('+0200');
+        const now = moment();
         const newMoment = now.set({
-            hours: parseInt(now.format('HH')) + randomIntFromInterval(3, 6),
+            hours: parseInt(now.format('HH')) + randomIntFromInterval(2, 5),
             minutes: parseInt(now.format('mm')) + randomIntFromInterval(0, 60),
         });
         const cron = `cron(${newMoment.format('mm')} ${newMoment.format(
             'HH',
         )} * * ? *)`;
+        const duration = moment.duration(newMoment.diff(moment()));
         const events = new AWS.EventBridge();
         events.putRule(
             { Name: 'random', ScheduleExpression: cron },
@@ -37,7 +38,7 @@ export const handler = async (event: APIGatewayEvent): Promise<string> => {
                     console.log(`ERROR: ${err}`);
                 } else {
                     console.log(
-                        `Scheduled next tweet to: ${newMoment.format()}`,
+                        `Scheduled next tweet to: ${newMoment.format()} which is in ${duration.humanize()} time`,
                     );
                 }
             },
