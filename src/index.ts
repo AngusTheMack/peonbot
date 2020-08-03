@@ -1,4 +1,4 @@
-import { postTweet, getLastTweets } from './bot';
+import { getLastTweets, postTweetWithVideo } from './bot';
 import {
     morningTweet,
     eveningTweet,
@@ -13,11 +13,11 @@ export const handler = async (event: APIGatewayEvent): Promise<string> => {
     const trigger = JSON.stringify(event, null, 2);
     console.log(`Event:  ${trigger}`);
     if (trigger.includes('morning')) {
-        return await postTweet(morningTweet).then(link => {
+        return await postTweetWithVideo(morningTweet).then(link => {
             return link;
         });
     } else if (trigger.includes('evening')) {
-        return await postTweet(eveningTweet).then(link => {
+        return await postTweetWithVideo(eveningTweet).then(link => {
             return link;
         });
     } else {
@@ -45,7 +45,7 @@ export const handler = async (event: APIGatewayEvent): Promise<string> => {
         );
         return await getLastTweets(5).then(async tweets => {
             const newTweet = getRandomTweet(tweets);
-            return await postTweet(newTweet).then(link => {
+            return await postTweetWithVideo(newTweet).then(link => {
                 return link;
             });
         });
